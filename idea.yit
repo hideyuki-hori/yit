@@ -1,0 +1,42 @@
+model User
+  id: u32
+  name: String
+
+model Post
+  id: u32
+  user_id: u32
+  content: String
+
+model Entity
+  users: User[] with posts: Post[]
+
+同一ファイル内に型を定義することもできるし、事前に型をimportすることもできる
+import { User, Post, Entity } from './types.yit'
+import { User, Post, Entity } from 'https://github.com/hideyuki-hori/xx'
+
+// コメントはシングルのみ
+// #から型名を書く(型の省略は不可)
+# Entity
+* id: 1
+  name: 'Alice'
+  posts:
+    * id: 1
+      user_id: 1
+      content: 'Hello, world!'
+    * id: 2
+      user_id: 1
+      content: 'My second post.' * id: 2
+  name: 'Bob'
+  posts:
+    * id: 3
+      user_id: 2
+      content: 'Good morning!'  
+* id: 3
+  name: 'Charlie'
+  posts:
+    * id: 4
+      user_id: 3
+      content: 'This is my first post.'
+    * id: 5
+      user_id: 3
+      content: 'Another post from Charlie.'
